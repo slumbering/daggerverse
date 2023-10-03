@@ -1,0 +1,9 @@
+{
+  host {
+    directory(path: "/Users/slumbering/forks/dagger.io/web") {
+      buildNextJs {
+        entries
+      }
+    }
+  }
+}
