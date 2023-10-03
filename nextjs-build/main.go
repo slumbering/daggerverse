@@ -5,7 +5,7 @@ import (
 	"fmt"
 )
 
-type NextjsBuild struct {}
+type NextjsBuild struct{}
 
 const (
 	// https://hub.docker.com/_/node
@@ -15,6 +15,7 @@ const (
 	alpineVersion = "3.18"
 )
 
+// Use a directory to build a NextJS app.
 func (d *Directory) BuildNextJS(ctx context.Context) (*Directory, error) {
 	node := dag.Container(ContainerOpts{Platform: Platform("linux/amd64")}).
 		From(fmt.Sprintf("node:%s", nodeJSVersion))
@@ -33,5 +34,6 @@ func (d *Directory) BuildNextJS(ctx context.Context) (*Directory, error) {
 		return nil, err
 	}
 
+	// Export the build directory to be used with other modules, such as deploying with `flyctl deploy`.
 	return build.Directory("out/"), nil
 }
