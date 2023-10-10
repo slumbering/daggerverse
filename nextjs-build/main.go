@@ -28,7 +28,7 @@ func (m *NextjsBuild) Build(source *Directory) *Container {
 	yarnCachePath := "/Users/slumbering/Library/Caches/Yarn/v6"
 	yarnCacheVolume := fmt.Sprintf("dagger-io-yarn-%s", nodeJSVersion)
 
-	return node.Pipeline("build").
+	build := node.Pipeline("build").
 		WithDirectory("/app", source, ContainerWithDirectoryOpts{
 			Exclude: []string{
 				"node_modules",
@@ -41,4 +41,25 @@ func (m *NextjsBuild) Build(source *Directory) *Container {
 		WithWorkdir("/app").
 		WithExec([]string{"yarn", "install"}).
 		WithExec([]string{"yarn", "export"})
+
+	return dag.Container(ContainerOpts{Platform: Platform("linux/amd64")}).
+		From(fmt.Sprintf("nginx:%s", nginxVersion)).
+		WithDirectory("/usr/share/nginx/html", build.Directory("/app/out")).
+		WithNewFile("/etc/nginx/conf.d/default.conf", ContainerWithNewFileOpts{
+			Contents: `
+				server {
+					listen       80;
+					listen  [::]:80;
+					server_name  localhost;
+
+					location / {
+						root   /usr/share/nginx/html;
+						try_files $uri $uri/index.html $uri.html =404;
+					}
+
+					error_page  404 	/404.html;
+
+					error_page  500 502 503 504 	/50x.html;
+				}
+			`})
 }
