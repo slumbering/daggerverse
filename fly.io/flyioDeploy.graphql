@@ -1,0 +1,9 @@
+query demo {
+  host {
+    directory(path: "/Users/slumbering/forks/dagger.io/web") {
+      flyioDeploy(appName: "dagger-io-with-zenith", token: "fo1_5CmleG7bnLq6lcX9Xx7mOh6gvcR11yYKci1mfc5_3lw") {
+        stdout
+      }
+    } 
+  }
+}
