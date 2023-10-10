@@ -1,8 +1,8 @@
-{
+query demo {
   host {
-    directory(path: "/Users/slumbering/forks/dagger.io/web") {
-      buildNextJs {
-        entries
+    directory(path: ".") {
+      nextJsbuild {
+        id
       }
     }
   }
