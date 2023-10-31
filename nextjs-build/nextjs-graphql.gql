@@ -1,9 +1,0 @@
-query demo {
-  host {
-    directory(path: "/Users/slumbering/forks/dagger.io/web") {
-      nextJsbuild {
-        stdout
-      }
-    }
-  }
-}

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"fmt"
 )
 
@@ -17,13 +18,9 @@ const (
 	alpineVersion = "3.18"
 )
 
-func (d *Directory) NextJSBuild() *Container {
-	return (&NextjsBuild{}).Build(d)
-}
-
 // Use a directory to build a NextJS app.
-func (m *NextjsBuild) Build(source *Directory) *Container {
-	node := dag.Container(ContainerOpts{Platform: Platform("linux/amd64")}).
+func (m *NextjsBuild) Build(ctx context.Context, source *Directory) *Container {
+	node := dag.Container().
 		From(fmt.Sprintf("node:%s", nodeJSVersion))
 	yarnCachePath := "/Users/slumbering/Library/Caches/Yarn/v6"
 	yarnCacheVolume := fmt.Sprintf("dagger-io-yarn-%s", nodeJSVersion)
