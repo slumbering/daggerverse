@@ -66,7 +66,7 @@ class Vercel {
   }
 
   @func()
-  // List available sites for the current directory
+  // Remove a given deployment from vercel
   async vercelRemove(currentWorkdir: Directory, deploymentURL: string, token: Secret): Promise<string> {
     const vercel = new VercelOptions(currentWorkdir, token)
 

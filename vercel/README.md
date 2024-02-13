@@ -1,3 +1,5 @@
+[![tested-with-dagger-version](https://img.shields.io/badge/Tested%20with%20dagger-0.9.9-success?style=for-the-badge)](https://github.com/dagger/dagger/releases/tag/v0.9.9)
+
 # Deploy to Vercel
 
 This module aims to deploy your projects to Vercel.
