@@ -21,13 +21,17 @@ class VercelOptions {
   @func()
   // Set up a container with the vercel cli installed
   base(): Container {
+    // create a cache volume
+    const nodeCache = dag.cacheVolume("node")
+
     return dag
       .container()
       .from("node:lts-slim")
-      .withExec(["yarn", "global", "add", "vercel"])
       .withSecretVariable("VERCEL_TOKEN", this.token)
       .withMountedDirectory('/app', this.currentWorkdir)
+      .withMountedCache("/src/node_modules", nodeCache)
       .withWorkdir("/app")
+      .withExec(["npm", "i", "-g", "vercel"])
   }
 }
 
@@ -38,7 +42,7 @@ class Vercel {
 
   @func()
   // Deploy the current directory to vercel
-  async vercelProd(currentWorkdir: Directory, token: Secret): Promise<string> {
+  async vercelDeploy(currentWorkdir: Directory, token: Secret): Promise<string> {
     const vercel = new VercelOptions(currentWorkdir, token)
     return await vercel
       .base()
@@ -57,6 +61,7 @@ class Vercel {
 
     return await vercel
       .base()
+      .withEnvVariable("CACHEBUSTER", Date.now().toString()) // invalidate cache to get a fresh list
       .withExec([
         "sh",
         "-c",
