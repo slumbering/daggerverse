@@ -33,9 +33,6 @@ const (
 //
 // Returns:
 // - *Container: A pointer to a Container configured to serve the built Next.js application using Nginx, ready for deployment.
-//
-// Note: This function assumes predefined 'nodeJSVersion' and 'nginxVersion' variables are set for specifying the versions of Node.js and Nginx to be used. It also manages Yarn cache for efficient dependency installation.
-
 func (m *NextjsBuild) Build(ctx context.Context, source *Directory) *Container {
 	node := dag.Container().
 		From(fmt.Sprintf("node:%s", nodeJSVersion))
