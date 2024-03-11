@@ -26,13 +26,6 @@ const (
 // Build initiates the construction process of a Next.js application within a containerized environment.
 // This method takes a source directory (source) as input, representing the root of the Next.js project.
 // The resulting container is configured for serving the static site, with Nginx acting as the web server.
-//
-// Parameters:
-// - ctx: A context.Context to provide control over the execution lifetime and cancellations.
-// - source: A pointer to a Directory representing the Next.js project's source directory.
-//
-// Returns:
-// - *Container: A pointer to a Container configured to serve the built Next.js application using Nginx, ready for deployment.
 func (m *NextjsBuild) Build(ctx context.Context, source *Directory) *Container {
 	node := dag.Container().
 		From(fmt.Sprintf("node:%s", nodeJSVersion))
