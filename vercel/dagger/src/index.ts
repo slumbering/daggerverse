@@ -1,3 +1,7 @@
+// Vercel module is a simple wrapper around the vercel cli
+//
+// It provides a simple way to deploy, list and remove deployments from vercel
+
 import { dag, Container, object, func, Secret, Directory, field } from "@dagger.io/dagger"
 
 
@@ -37,11 +41,15 @@ class VercelOptions {
 
 
 @object()
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 class Vercel {
 
+  /**
+   * Deploy the current directory to vercel
+   * @param currentWorkdir 
+   * @param token 
+   * @returns deployment URL
+   */
   @func()
-  // Deploy the current directory to vercel
   async vercelDeploy(currentWorkdir: Directory, token: Secret): Promise<string> {
     const vercel = new VercelOptions(currentWorkdir, token)
     return await vercel
@@ -54,8 +62,13 @@ class Vercel {
       .stdout()
   }
 
+  /**
+   * List all deployments in vercel
+   * @param currentWorkdir 
+   * @param token 
+   * @returns list of deployments
+   */
   @func()
-  // List available sites for the current directory
   async vercelList(currentWorkdir: Directory, token: Secret): Promise<string> {
     const vercel = new VercelOptions(currentWorkdir, token)
 
@@ -70,8 +83,14 @@ class Vercel {
       .stdout()
   }
 
+  /**
+   * Remove a deployment from vercel
+   * @param currentWorkdir 
+   * @param deploymentURL 
+   * @param token 
+   * @returns log of the removal
+   */
   @func()
-  // Remove a given deployment from vercel
   async vercelRemove(currentWorkdir: Directory, deploymentURL: string, token: Secret): Promise<string> {
     const vercel = new VercelOptions(currentWorkdir, token)
 
