@@ -1,6 +1,6 @@
 /**
- * @module vercel
- * @description Vercel module is a simple wrapper around the vercel cli. It provides a simple way to deploy, list and remove deployments from vercel
+ * A simple wrapper around the vercel cli
+ * Vercel module provides a simple way to deploy, list and remove deployments from vercel
  */
 
 import { dag, Container, object, func, Secret, Directory, field } from "@dagger.io/dagger"
