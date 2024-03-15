@@ -46,8 +46,8 @@ class Vercel {
 
   /**
    * Deploy the current directory to vercel
-   * @param currentWorkdir 
-   * @param token 
+   * @param currentWorkdir path to the directory to deploy
+   * @param token vercel token
    * @returns deployment URL
    */
   @func()
@@ -65,8 +65,8 @@ class Vercel {
 
   /**
    * List all deployments in vercel
-   * @param currentWorkdir 
-   * @param token 
+   * @param currentWorkdir path of the directory to list deployments
+   * @param token vercel token
    * @returns list of deployments
    */
   @func()
@@ -86,9 +86,9 @@ class Vercel {
 
   /**
    * Remove a deployment from vercel
-   * @param currentWorkdir 
-   * @param deploymentURL 
-   * @param token 
+   * @param currentWorkdir path of the directory to remove deployment
+   * @param deploymentURL URL of the deployment to remove
+   * @param token vercel token
    * @returns log of the removal
    */
   @func()
