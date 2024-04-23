@@ -1,4 +1,4 @@
-[![tested-with-dagger-version](https://img.shields.io/badge/Tested%20with%20dagger-0.11.0-success?style=for-the-badge)](https://github.com/dagger/dagger/releases/tag/v0.11.0)
+[![tested-with-dagger-version](https://img.shields.io/badge/Tested%20with%20dagger-0.10.3-success?style=for-the-badge)](https://github.com/dagger/dagger/releases/tag/v0.10.3)
 
 # Deploy to Vercel
 
