@@ -2,7 +2,7 @@
 
 # Deploy to Vercel
 
-This module aims to deploy your projects to Vercel.
+This module aims to deploy your projects to Vercel
 
 ## Usage
 
