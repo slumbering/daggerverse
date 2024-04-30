@@ -1,0 +1,6 @@
+{
+  "name": "vercel",
+  "sdk": "typescript",
+  "source": "dagger",
+  "engineVersion": "v0.9.9"
+}
